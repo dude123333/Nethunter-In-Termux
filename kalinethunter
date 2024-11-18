@@ -80,7 +80,7 @@ checkdeps() {
 # URLs of all possibls architectures
 
 seturl() {
-	URL="https://images.kali.org/nethunter/kalifs-${SETARCH}-${chroot}.tar.xz"
+	URL="https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz"
 }
 
 # Utility function to get tar file
@@ -89,23 +89,23 @@ gettarfile() {
 	printf "$blue [*] Getting tar file...$reset\n\n"
 	DESTINATION=$HOME/kali-${SETARCH}
 	seturl
-    cd $HOME
-    rootfs="kalifs-${SETARCH}-${chroot}.tar.xz"
-    if [ ! -f "$rootfs" ]; then
-        axel ${EXTRAARGS} --alternate "$URL"
-    else
-        printf "${red}[!] continuing with already downloaded image, if this image is corrupted or half downloaded then delete it manually to download a fresh image.$reset\n\n"
-    fi
+	cd $HOME
+	rootfs="kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz"
+	if [ ! -f "$rootfs" ]; then
+		axel ${EXTRAARGS} --alternate "$URL"
+	else
+		printf "${red}[!] continuing with already downloaded image, if this image is corrupted or half downloaded then delete it manually to download a fresh image.$reset\n\n"
+	fi
 }
 
 # Utility function to get SHA
 
 getsha() {
 	printf "\n${blue} [*] Getting SHA ... $reset\n\n"
-    if [ -f kalifs-${SETARCH}-${chroot}.sha512sum ]; then
-        rm kalifs-${SETARCH}-${chroot}.sha512sum
-    fi
-	axel ${EXTRAARGS} --alternate "https://images.kali.org/nethunter/kalifs-${SETARCH}-${chroot}.sha512sum" -o kalifs-${SETARCH}-${chroot}.sha512sum
+	if [ -f kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz.sha512sum ]; then
+		rm kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz.sha512sum
+	fi
+	axel ${EXTRAARGS} --alternate "https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz.sha512sum" -o kali-nethunter-rootfs-${chroot}-${SETARCH}.tar.xz.sha512sum
 }
 
 # Utility function to check integrity
